@@ -22,6 +22,8 @@ Run `npm install`, then `npm run dev`. Run `npm run build` for the production si
 
 Run `npm run check` for Astro and TypeScript diagnostics.
 
+The isolated Cesium viewer for satellite-intro Steps 1–2 is at `/satellite-preview/`. See [SATELLITE_SETUP.md](SATELLITE_SETUP.md) for imagery configuration, local testing and verification limits. It is not yet integrated into the homepage.
+
 ## Coverage and activity demonstration
 
 The map includes 12 illustrative Dubai collection locations, red markers, animated connections and a simulated vehicle. Service filters, district buttons, map popups and recenter controls are interactive. The activity panel can be paused and automatically stops updating when off-screen, hidden or reduced motion is enabled.

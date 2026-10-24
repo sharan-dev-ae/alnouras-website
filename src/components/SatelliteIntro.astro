@@ -1,0 +1,25 @@
+---
+import '../styles/satellite.css';
+---
+<section class="satellite-intro" data-satellite-intro data-state="idle" data-has-imagery="false" aria-labelledby="satellite-title">
+  <div class="satellite-stage">
+    <div class="satellite-poster"><img src="/images/alnouras-hero.webp" alt="An Al Nouras collection truck, shown as the lightweight fallback" width="1920" height="1080"/><div></div></div>
+    <div class="satellite-canvas" data-satellite-canvas data-lenis-prevent></div>
+    <div class="satellite-heading"><span class="satellite-eyebrow">AL NOURAS / A GEOGRAPHIC PERSPECTIVE</span><h1 id="satellite-title">A wider perspective.</h1><p>Real Earth imagery. A view towards Dubai.</p></div>
+    <a class="satellite-skip" href="/#main">Skip intro <span aria-hidden="true">↗</span></a>
+    <div class="satellite-fallback-controls"><p data-fallback-message>Preparing a static satellite view. The homepage is always available.</p><button type="button" data-load-viewer>Load Earth view</button><noscript><p>The 3D view requires JavaScript. <a href="/">Continue to the homepage.</a></p></noscript></div>
+    <div class="satellite-status" role="status" aria-live="polite" aria-atomic="true"><span data-viewer-status>Waiting for the viewer.</span><small data-imagery-source>Imagery source: NASA Blue Marble / GIBS</small></div>
+  </div>
+  <div class="satellite-test-controls"><div><span class="satellite-eyebrow">STATIC INSPECTION VIEWS</span><p>These buttons switch views instantly. No scroll flight or coverage markers are enabled yet.</p></div><div class="satellite-view-buttons" role="group" aria-label="Choose a static camera view"><button type="button" data-camera-view="orbit" aria-pressed="true" disabled>Orbital Earth</button><button type="button" data-camera-view="dubai" aria-pressed="false" disabled>Dubai</button></div></div>
+  <p class="satellite-imagery-note">NASA Blue Marble is a global satellite composite, not live imagery or detailed city imagery. A licensed, configured Cesium ion imagery asset is required to evaluate high-resolution Dubai detail. Company coverage coordinates will be added only after verification.</p>
+</section>
+<script>
+  import { mountSatelliteIntros } from '../scripts/satellite/mount';
+  let cleanup: (() => void) | undefined;
+  const boot = () => { cleanup?.(); cleanup = mountSatelliteIntros(); };
+  boot();
+  document.addEventListener('astro:before-swap', () => { cleanup?.(); cleanup = undefined; });
+  document.addEventListener('astro:page-load', () => { if (!cleanup) boot(); });
+  window.addEventListener('pagehide', () => { cleanup?.(); cleanup = undefined; });
+  window.addEventListener('pageshow', event => { if (event.persisted) boot(); });
+</script>
