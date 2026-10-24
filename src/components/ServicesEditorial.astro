@@ -1,0 +1,25 @@
+---
+import Icon from './Icon.astro';
+interface Service { number: string; name: string; icon: string; text: string; tags: string[]; image: string; alt: string; }
+interface Props { services: Service[]; }
+const { services } = Astro.props;
+---
+<section id="services" class="services section-pad editorial-services">
+  <div class="container">
+    <div class="section-heading"><div><span class="eyebrow blue-eyebrow"><span class="tiny-square"></span> 01 / EXPERTISE, IN EVERY COLLECTION</span><h2>Different demands.<br/><span>One dependable partner.</span></h2></div><p>From the first collection to your ongoing needs, we make waste management one less thing to think about.</p></div>
+    <div class="services-editorial-layout">
+      <div class="service-choices" aria-label="Explore our waste services">
+        {services.map((service,index) => <article class="service-entry" data-service-entry={service.number} data-active={index === 0 ? 'true' : 'false'}>
+          <h3><button class="service-choice" data-service-select={service.number} aria-expanded={index === 0} aria-controls={`service-copy-${service.number}`}><span class="choice-number">{service.number}</span><span>{service.name}</span><span class="choice-arrow"><Icon name="diagonal" size={23}/></span></button></h3>
+          <div class="service-entry-body" id={`service-copy-${service.number}`}><div><p>{service.text}</p><div class="service-tags">{service.tags.map(tag=><span>{tag}</span>)}</div><button class="service-link" data-service-dialog={service.number}>Explore service <Icon name="diagonal" size={18}/></button></div></div>
+        </article>)}
+        <p class="service-selector-note">Choose a service to explore its collection requirements.</p>
+      </div>
+      <div class="service-visual-stage" aria-label="Service photography">
+        {services.map((service,index)=><figure class="service-visual" data-service-visual={service.number} data-active={index === 0 ? 'true' : 'false'} aria-hidden={index !== 0}><img src={service.image} alt={service.alt} width="900" height="650" loading="lazy"/><figcaption><span>{service.number} / AL NOURAS SOLUTIONS</span><strong>{service.name}</strong><Icon name={service.icon} size={28}/></figcaption></figure>)}
+        <span class="service-image-rule" aria-hidden="true"></span>
+      </div>
+    </div>
+    <div class="services-footnote"><span><Icon name="recycle" size={19}/> Also supporting industrial, hazardous and pharmaceutical waste requirements.</span><a href="#contact">Find your solution <Icon name="arrow" size={17}/></a></div>
+  </div>
+</section>

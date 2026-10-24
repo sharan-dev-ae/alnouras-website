@@ -1,0 +1,18 @@
+---
+import Icon from './Icon.astro';
+const chapters = [
+ { number:'01', label:'The fleet', title:'Built for the work ahead.', text:'Purpose-built collection vehicles. Practical equipment for the waste your business generates.', image:'/images/alnouras-fleet.webp', alt:'An Al Nouras Hino waste collection truck from the company archive', tags:['Waste collection vehicles','Transporting & bulk collection'] },
+ { number:'02', label:'The people', title:'People you can count on.', text:'Professional, uniformed drivers and crews. An experienced team behind every collection.', image:'/images/alnouras-collection.webp', alt:'An Al Nouras team member wearing gloves and a mask while operating collection equipment', tags:['Trained, uniformed teams','Professional collection practices'] },
+ { number:'03', label:'The commitment', title:'A proper setup. Every collection.', text:'Collection plans suited to your operation. Discuss your site, your waste and your schedule with us.', image:'/images/alnouras-operations.webp', alt:'An Al Nouras crew and truck handling a skip collection in Dubai', tags:['Collection plans for your site','A locally based team'] },
+];
+---
+<section id="fleet" class="fleet-section section-pad cinematic-fleet"><div class="container">
+  <div class="section-heading"><div><span class="eyebrow"><span class="tiny-square"></span> 03 / THE WORK BEHIND THE PROMISE</span><h2>Serious equipment.<br/><span>Even better people.</span></h2></div><p>Purpose-built collection vehicles and professional, uniformed teams. The right approach from arrival to the final collection.</p></div>
+  <div class="fleet-story" data-fleet-story>
+    <div class="fleet-story-media">{chapters.map((chapter,index)=><figure class="fleet-story-image" data-fleet-image={index} aria-hidden={index !== 0}><img src={chapter.image} alt={chapter.alt} width="1400" height="529" loading="lazy"/></figure>)}<span class="fleet-photo-credit">AL NOURAS / COMPANY ARCHIVE</span></div>
+    <div class="fleet-story-content"><div class="fleet-chapter-track" aria-hidden="true">{chapters.map((chapter,index)=><span data-fleet-tab={index} class:list={{active:index===0}}><i></i>{chapter.number} / {chapter.label}</span>)}</div>
+      <div class="fleet-chapters">{chapters.map((chapter,index)=><article class="fleet-chapter" data-fleet-chapter={index}><span class="eyebrow">{chapter.number} / {chapter.label}</span><h3>{chapter.title}</h3><p>{chapter.text}</p><ul>{chapter.tags.map(tag=><li><Icon name="check" size={15}/>{tag}</li>)}</ul></article>)}</div>
+      <div class="fleet-story-bottom"><a class="text-link" href="#contact">Discuss your collection needs <Icon name="diagonal" size={18}/></a><span class="fleet-step-label" aria-hidden="true"><span id="fleet-step">01</span> / 03</span></div>
+    </div>
+  </div>
+</div></section>

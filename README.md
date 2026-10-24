@@ -2,6 +2,20 @@
 
 Static Astro website with TypeScript and Tailwind CSS. The blue and yellow design uses real Al Nouras fleet and staff photography, locally hosted variable fonts, a photographic landing animation, scroll reveals, service detail dialogs, an interactive Leaflet map, and mobile navigation.
 
+## Cinematic presentation
+
+The editorial layer uses the approved navy `#102B53`, blue `#1856A3`, yellow `#F4C542`, white `#F5F7FA` and dark `#101820` palette. `cinematic.css` builds on the existing stylesheet; the homepage, service content, contact links and map data remain intact.
+
+- GSAP and ScrollTrigger coordinate the viewport-height hero, masked heading lines, image reveals, section dividers and a short pinned fleet narrative.
+- Lenis smooths wheel scrolling on capable desktop devices. Touch devices keep native scrolling. Maps and dialogs are excluded from smoothing.
+- Services use stable hover targets on desktop, tap selection on touch devices, and arrow-key navigation. Existing detail dialogs and enquiry prefilling are preserved.
+- The operations showcase uses actual company archive photographs and does not assert named client projects.
+- Magnetic buttons and restrained image-pointer movement run only on capable devices with fine pointers. No global cursor replacement or Three.js dependency is used.
+- Reduced motion disables cinematic timelines, smooth scrolling and pinning. The fleet story remains readable as static content.
+- Event listeners use an AbortController; observers, Leaflet, GSAP media contexts, the scroll ticker and Lenis are cleaned up before Astro page swaps and page exits. Back/forward cache restoration reinitializes the page.
+
+The in-app browser automation bridge was unavailable during implementation. Build/type checks and local HTTP asset checks are available; rendered desktop/mobile interaction verification and FPS/Lighthouse measurements still require a working browser QA session.
+
 ## Development
 
 Run `npm install`, then `npm run dev`. Run `npm run build` for the production site in `dist/`, and `npm run preview` to inspect that build. On Windows PowerShell with restricted script execution, use `npm.cmd`.
