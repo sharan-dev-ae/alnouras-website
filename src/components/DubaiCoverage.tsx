@@ -12,17 +12,22 @@ export default function DubaiCoverage() {
     let disposed = false;
     let map: import('leaflet').Map | undefined;
     let resizeObserver: ResizeObserver | undefined;
-    void Promise.all([import('leaflet'), fetch('/data/dubai-boundary.geojson').then(response => response.json())]).then(([module,boundary]) => {
+    void Promise.all([import('leaflet'), fetch('/data/uae-emirates.geojson').then(response => response.json())]).then(([module,emiratesData]) => {
       if (disposed || !mapRoot.current) return;
       const L = (module.default ?? module) as typeof import('leaflet');
-      map = L.map(mapRoot.current, { center:[24.55,54.55], zoom:7, minZoom:6, maxZoom:14, scrollWheelZoom:false, zoomControl:false, attributionControl:true });
+      map = L.map(mapRoot.current, { center:[24.35,54.45], zoom:6.5, zoomSnap:.25, minZoom:6, maxZoom:12, scrollWheelZoom:false, touchZoom:false, doubleClickZoom:false, boxZoom:false, zoomControl:false, attributionControl:true });
       map.attributionControl.setPrefix(false);
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom:19, attribution:'&copy; OpenStreetMap contributors', className:'alnouras-map-tiles' }).addTo(map);
       L.control.zoom({ position:'bottomright' }).addTo(map);
-      L.geoJSON(boundary, { style:{ color:'#f4c542', weight:3, opacity:1, fillColor:'#f4c542', fillOpacity:.38 } }).addTo(map);
+      L.geoJSON(emiratesData, { style:feature => {
+        const isDubai = feature?.properties?.displayLabel === 'Dubai';
+        return isDubai
+          ? { color:'#f4c542', weight:3, opacity:1, fillColor:'#f4c542', fillOpacity:.5 }
+          : { color:'#526f8b', weight:1.4, opacity:.9, fillColor:'#0b2947', fillOpacity:.12 };
+      }}).addTo(map);
       emirates.forEach(([name,lat,lng]) => L.marker([lat,lng], { interactive:false, icon:L.divIcon({ className:'emirate-map-label', html:name, iconSize:[120,20], iconAnchor:[60,10] }) }).addTo(map!));
       L.marker([25.20,55.20], { interactive:false, zIndexOffset:500, icon:L.divIcon({ className:'emirate-map-label emirate-map-label-active', html:'DUBAI', iconSize:[90,26], iconAnchor:[45,13] }) }).addTo(map);
-      map.fitBounds([[22.72,51.55],[26.35,56.45]], { padding:[12,12], animate:false });
+      map.setView([24.35,54.45], 6.5, { animate:false });
       resizeObserver = new ResizeObserver(()=>map?.invalidateSize({ animate:false }));
       resizeObserver.observe(mapRoot.current);
       requestAnimationFrame(()=>requestAnimationFrame(()=>map?.invalidateSize({ animate:false })));
