@@ -1,0 +1,9 @@
+interface Props { name: string; size?: number; className?: string; }
+
+const paths: Record<string, string> = {
+ arrow: 'M5 12h14M13 6l6 6-6 6', diagonal: 'M6 18 18 6M6 6h12v12', check: 'm5 12 4 4L19 6',
+ pin: 'M20 10c0 6-8 11-8 11S4 16 4 10a8 8 0 1 1 16 0ZM15 10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',
+ phone: 'M7 3H3v4c0 8 6 14 14 14h4v-4l-5-2-2 2c-4-1-6-3-7-7l2-2-2-5Z', mail: 'M3 5h18v14H3ZM3 6l9 7 9-7', clock: 'M12 8v5l3 2M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z', shield: 'm12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Zm-4 9 3 3 5-6', truck: 'M3 6h12v12H3ZM15 10h4l3 4v4h-7M5 18a2 2 0 1 0 4 0m7 0a2 2 0 1 0 4 0', medical: 'M9 3h6v6h6v6h-6v6H9v-6H3V9h6Z', building: 'M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1M10 21v-4h4v4', recycle: 'm8 6 4-4 4 7M8 6h5M18 10l4 5-5 6M22 15h-6M13 21H5l-3-6M5 21l3-5M3 12l3-5', people: 'M16 21v-3a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v3M20 21v-3a4 4 0 0 0-3-4M13 6a4 4 0 1 1-8 0 4 4 0 0 1 8 0ZM17 2a4 4 0 0 1 0 8', leaf: 'M20 3C9 2 3 7 5 15s17 7 15-12ZM4 21 15 10', menu: 'M4 7h16M4 12h16M4 17h16', close: 'm6 6 12 12M6 18 18 6', plus: 'M12 5v14M5 12h14', target: 'M12 2v4m0 12v4M2 12h4m12 0h4M19 12a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z', pause: 'M8 5v14M16 5v14', play: 'm8 4 12 8-12 8Z', chevron: 'm9 5 7 7-7 7', info: 'M12 11v6m0-10v.1M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z',
+};
+export default function Icon({ name, size = 24, className = '' }: Props) { return (<svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[name] || paths.arrow}/></svg>
+); }

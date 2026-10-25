@@ -3,7 +3,7 @@ import type { Map as LeafletMap, Marker, Polyline, LayerGroup } from 'leaflet';
 import { districts } from '../data/coverage';
 import { initMotion } from './motion';
 
-function initializeSite() {
+export function initializeSite() {
   if (!document.querySelector('#main .hero')) return () => {};
   const abort = new AbortController();
   const cleanups: Array<() => void> = [];
@@ -214,13 +214,8 @@ function initializeSite() {
       map = L.map('dubai-map', { scrollWheelZoom: false, zoomControl: false, attributionControl: true, minZoom: 9, maxZoom: 16, preferCanvas: false });
       map.attributionControl.setPrefix(false);
       L.control.zoom({ position: 'bottomright' }).addTo(map);
-      const tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd', maxZoom: 20,
-      });
-      tiles.on('tileload', () => document.querySelector('.map-fallback')?.classList.add('loaded'));
-      tiles.on('tileerror', () => dashboard?.classList.add('map-unavailable'));
-      tiles.addTo(map);
+      // Coordinates and interactions are rendered over the local Dubai schematic.
+      // This avoids API keys, access tokens, tile quotas and provider failures.
       markerLayer = L.layerGroup().addTo(map);
       const icon = L.divIcon({ className: 'red-map-marker', html: '<span class="map-pin"></span>', iconSize: [15, 15], iconAnchor: [7, 7] });
       districts.forEach(area => {
@@ -290,7 +285,8 @@ function initializeSite() {
     if (coverageVisible) void initMap();
     scheduleSimulation();
   }, { rootMargin: '200px' });
-  coverageObserver.observe(document.querySelector('#coverage')!);
+  const coverageSection = document.querySelector('#coverage');
+  if (coverageSection && !document.querySelector('.coverage-map-static')) coverageObserver.observe(coverageSection);
 
   function scheduleSimulation() {
     if (animationFrame !== undefined) cancelAnimationFrame(animationFrame);
@@ -340,10 +336,3 @@ function initializeSite() {
   };
   return remove;
 }
-let teardown: (() => void) | undefined;
-function boot() { teardown?.(); teardown = initializeSite(); }
-boot();
-document.addEventListener('astro:before-swap', () => { teardown?.(); teardown = undefined; });
-document.addEventListener('astro:page-load', () => { if (!teardown) boot(); });
-window.addEventListener('pagehide', () => { teardown?.(); teardown = undefined; });
-window.addEventListener('pageshow', event => { if (event.persisted) boot(); });

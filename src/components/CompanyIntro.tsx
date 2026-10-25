@@ -1,0 +1,22 @@
+import Icon from './Icon';
+
+export default function CompanyIntro() {
+  return (
+    <section id="company" className="company-intro chapter-section">
+      <div className="container company-intro-grid">
+        <div className="company-intro-copy reveal">
+          <span className="chapter-number">01</span>
+          <span className="eyebrow"><i className="tiny-square"/> WHO WE ARE</span>
+          <h2>Three decades.<br/><span>One cleaner Dubai.</span></h2>
+          <p>Al Nouras is a Dubai-based waste collection and transporting company serving healthcare facilities, construction sites and businesses across the city.</p>
+          <a href="#services">See what we collect <Icon name="arrow" size={17}/></a>
+        </div>
+        <div className="company-intro-visual reveal">
+          <img src="/images/alnouras-operations.webp" alt="Al Nouras truck and crew handling a collection in Dubai" width="1400" height="529" loading="lazy"/>
+          <div className="experience-block"><strong><span data-count="30">30</span><sup>+</sup></strong><span>YEARS OF<br/>LOCAL EXPERIENCE</span></div>
+          <div className="company-proof"><span><Icon name="pin" size={17}/> Dubai based</span><span><Icon name="clock" size={17}/> 24/7 enquiries</span><span><Icon name="people" size={17}/> Professional teams</span></div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,6 +1,7 @@
 node_modules/
 dist/
 .astro/
+.prerender/
 .npm-cache/
 .env
 .env.*
