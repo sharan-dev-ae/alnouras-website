@@ -206,4 +206,5 @@ body::-webkit-scrollbar-thumb:hover{background:#ffe071}
 @media(max-width:800px){.service-overview-grid{grid-template-columns:1fr}}
 .coverage-map-legend i{border-style:solid;background:#f4c54266}
 .company-scale{gap:8px;align-items:stretch}.company-scale>span{display:grid;grid-template-columns:24px auto;grid-template-rows:auto auto;column-gap:8px;min-width:130px;padding:12px 14px;background:#06182cdb;border:1px solid #ffffff20;backdrop-filter:blur(10px)}.company-scale>span>svg{grid-row:1/3;align-self:center;color:var(--yellow)}.company-scale strong{font:550 21px/1 'Manrope Variable',sans-serif;color:#fff;letter-spacing:-.7px}.company-scale strong b{font:inherit}.company-scale small{color:#91a8bd;font-size:7px;letter-spacing:1px;margin-top:4px}
+.company-intro-visual>img{object-position:51% center}
 @media(max-width:600px){.company-scale{display:grid;grid-template-columns:repeat(3,1fr);left:10px;right:10px;gap:5px}.company-scale>span{min-width:0;padding:9px 7px;grid-template-columns:1fr;text-align:center}.company-scale>span>svg{display:none}.company-scale strong{font-size:17px}.company-scale small{font-size:6px}}
