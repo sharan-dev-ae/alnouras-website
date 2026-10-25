@@ -59,7 +59,7 @@ export function initMotion(signal: AbortSignal) {
     }
     if (desktop && capable) gsap.to('.hero-image img', { yPercent: 5, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.5 } });
 
-    const revealTargets = Array.from(new Set(gsap.utils.toArray<HTMLElement>('.reveal,.section-heading,.compact-heading,.company-intro-copy,.company-intro-visual,.service-overview-card,.service-visual-stage,.service-choices,.coverage-map-static,.fleet-compact-media,.fleet-compact-card,.about-visual,.about-copy,.contact-copy,.enquiry-form,.value-title,.value-feature')));
+    const revealTargets = Array.from(new Set(gsap.utils.toArray<HTMLElement>('.reveal,.section-heading,.compact-heading,.company-intro-copy,.company-intro-visual,.service-overview-card,.service-visual-stage,.service-choices,.coverage-map-static,.fleet-compact-media,.fleet-compact-card,.equipment-stage,.equipment-selector,.about-visual,.about-copy,.contact-copy,.enquiry-form,.value-title,.value-feature')));
     revealTargets.forEach((target, index) => gsap.set(target, { opacity: 0, x: index % 2 === 0 ? -24 : 24, y: 14, force3D: true }));
     const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
       if (!entry.isIntersecting) return;
